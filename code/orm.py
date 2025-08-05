@@ -148,6 +148,84 @@ class Message(Base):
     chat : Mapped["Chat"] = relationship(back_populates="messages")
     def __repr__(self) -> str :
         return f"Message(id={self.id!r}), mesText={self.mestext!r},mesDate={self.mesdate!r}"
-
-# continue here : page 41 
+ 
 # Insert data - Josh
+with Sessions(engine) as session:
+    # Insert subscriptions
+    subscription1 = Subscription(
+        subid = uuid.UUID("ba2a5760-0ead-4988-b9cc-b2cc77cfcd34"),
+        subtier = "Premium",
+        subprice = 9.99,
+        outstandingbalance = 0.00,
+        nextduedate = datetime.datatime.now() + datatime.timedelta(days=6),
+        annualbilling = False,
+        userid = uuid.UUID("3db2bb9a-2418-4258-bbc4-c7ea32b39570")
+    )
+    subscription2 = Subscription(
+        subid = uuid.UUID("ef7b5717-96f2-42b4-8bb2-23ae9172ff65"),
+        subtier = "Bestie for Life",
+        subprice = 49.99,
+        outstandingbalance = 0.00,
+        nextduedate = datetime.datetime.now() + datetime.timedelta(days=3) + datetime.timedelta(hours=5),
+        annualbilling = False,
+        userid = uuid.UUID("a87b4c9b-f164-4e4b-99a4-2d64f2212ca7")
+    )
+    if actuallyWriteDataToTheDatabase:
+        session.add_all([subscription1, subscription2])
+        session.commit()
+    
+    # Insert payment methods 
+    pmtmethod1 = paymentmethod(
+        subid = uuid.UUID("ba2a5760-0ead-4988-b9cc-b2cc77cfcd34"),
+        pmttype = payment_type.thirdParty,
+        paypal = "somePaypalPaymentAPIKeyGoesHere"
+    )
+    pmtmethod2 = paymentmethod(
+        subid = uuid.UUID("ef7b5717-96f2-42b4-8bb2-23ae9172ff65"),
+        pmttype = payment_type.credit,
+        num = 4381946282957154,
+        cvv = 123,
+        expiration = "05/25",
+        pmtstreetaddr = "1 N Oak St",
+        pmtcity = "Anytown",
+        pmtstate = "IL",
+        pmtzipcode = "60601"
+    )
+    pmtmethod3 = paymentmethod(
+        subid = uuid.UUID("ef7b5717-96f2-42b4-8bb2-23ae9172ff65"),
+        pmttype = payment_type.credit,
+        num = 6195016491745164,
+        cvv = 321,
+        expiration = "01/26",
+        pmtstreetaddr = "405 S Railroad Ave",
+        pmtcity = "Cornfieldia",
+        pmtstate = "IN",
+        pmtzipcode = "43052"
+    )
+    pmtmethod4 = paymentmethod(
+        subid = uuid.UUID("ef7b5717-96f2-42b4-8bb2-23ae9172ff65"),
+        pmttype = payment_type.credit,
+        num = 1750161067181961,
+        cvv = 159,
+        expiration = "12/24",
+        pmtstreetaddr = "8000 University Rd",
+        pmtcity = "Lafayette",
+        pmtstate = "IN",
+        pmtzipcode = "47904"
+    )
+    if actuallyWriteDataToTheDatabase:
+        session.add_all([pmtmethod1, pmtmethod2, pmtmethod3, pmtmethod4])
+        session.commit()
+
+# continue here : page 42
+# Insert data - Drew 
+with Session(engine) as session:
+    user_1 = Users(
+        usrid= uuid.UUID("4fc51a78-8d6c-4c64-9c68-a005558a0444"),
+        username = "TrueB00L",
+        email = "B00leanFreak45@aol.com",
+        passwordhash = "kYf8npoLQB@",
+        passwordsalt="o@a#&%JE@E1",
+        mfatoken="MX%V6-Q3pQg",
+        subscription=[Subscription(subtier="Free")]
+    )

@@ -217,7 +217,6 @@ with Sessions(engine) as session:
         session.add_all([pmtmethod1, pmtmethod2, pmtmethod3, pmtmethod4])
         session.commit()
 
-# continue here : page 42
 # Insert data - Drew 
 with Session(engine) as session:
     user_1 = Users(
@@ -229,3 +228,34 @@ with Session(engine) as session:
         mfatoken="MX%V6-Q3pQg",
         subscription=[Subscription(subtier="Free")]
     )
+    user_2 =  Users(
+        usrid=uuid.UUID("2bca8c6d-a738-4ad6-880d-29cb3af07909"),
+        username="JaeMason1234",
+        email="masonry7@hotmail.com",
+        passwordhash="lQEBgAdu1D5",
+        passwordsalt="AJ0%LwrL$z",
+        mfatoken="FA!vI_t5mcW",
+        subscription=[Subscription(subtier="Premium"),Subscription(subtier='Free')]
+    )
+    user_3 = Users(
+        usrid=uuid.UUID("586c6e9f-2d83-4a09-be8f-03e352eaf0ef"),
+        username="mortimersmither",
+        email="r&m618@gmail.com",
+        passwordhash="B!6H4cBp%9h",
+        passwordsalt="ez-F9pk41SP",
+        mfatoken="Tm&*2wbt7PY",
+        subspription=[Subscription(subtier="Bestie for Life"),Subscription(subtier='Free')]
+    )
+    user_4 = Users(
+        usrid=uuid.UUID("0e607745-f99a-4cbc-aa5c-bc7f2e0c6af3"),
+        username="tony_stank88",
+        email="male.robo@yahoo.com",
+        passwordhash="h!azV^24Y*d",
+        passwordsalt="HQipskybvWw",
+        mfatoken="8E!A4plaamU",
+        subscription=[Subscription(subtier="Bestie for Life"), Subscription(subtier='Free')]
+    )
+    user_5 = Users(
+        
+    )
+    # continue here : page 44
